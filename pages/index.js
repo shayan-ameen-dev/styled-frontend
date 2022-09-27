@@ -1,7 +1,7 @@
 import Head from 'next/head';
 // Query
 import { useQuery } from 'urql';
-import { PRODUCTS_QUERY } from '../lib/query';
+import { PRODUCTS_QUERY } from '../lib/queries';
 // Components
 import Product from '../components/Product';
 // Styled
