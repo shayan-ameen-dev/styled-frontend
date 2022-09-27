@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
-export const StyledProductDetails = styled.div`
+export const StyledProductDetails = styled(motion.div)`
   display: flex;
   justify-content: space-between;
   margin-top: 5rem;
@@ -10,24 +11,22 @@ export const StyledProductDetails = styled.div`
   }
 `;
 
-export const StyledProductInfo = styled.div`
+export const StyledProductInfo = styled(motion.div)`
   width: 40%;
 
   button {
-    cursor: pointer;
     font-size: 1rem;
     font-weight: 500;
     padding: 0.5rem 1rem;
   }
 `;
 
-export const StyledQuantity = styled.div`
+export const StyledQuantity = styled(motion.div)`
   display: flex;
   align-items: center;
   margin: 1rem 0;
 
   button {
-    cursor: pointer;
     background: transparent;
     border: none;
     display: flex;
@@ -49,7 +48,7 @@ export const StyledQuantity = styled.div`
   }
 `;
 
-export const StyledButton = styled.button`
+export const StyledButton = styled(motion.button)`
   width: 100%;
   background-color: var(--primary);
   color: white;

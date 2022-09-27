@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
-export const StyledNav = styled.nav`
+export const StyledNav = styled(motion.nav)`
   align-items: center;
   display: flex;
   font-size: 1rem;
@@ -12,7 +13,7 @@ export const StyledNav = styled.nav`
   }
 `;
 
-export const StyledNavItems = styled.div`
+export const StyledNavItems = styled(motion.div)`
   align-items: center;
   display: flex;
   justify-content: space-around;

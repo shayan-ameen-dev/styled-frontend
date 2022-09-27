@@ -7,7 +7,9 @@ import { Provider, createClient } from 'urql';
 // Styles
 import '../styles/globals.css';
 
-const client = createClient({ url: process.env.NEXT_PUBLIC_BACKEND_API_URL });
+const client = createClient({
+  url: process.env.NEXT_PUBLIC_BACKEND_GRAPHQL_URL,
+});
 
 function MyApp({ Component, pageProps }) {
   return (
