@@ -16,10 +16,22 @@ import {
 } from '../../styles/StyledProductDetails';
 // Icons
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
+// Toast
+import toast from 'react-hot-toast';
+import { useEffect } from 'react';
 
 export default function ProductDetails() {
-  const { addProductToCart, quantity, incrementQuantity, decrementQuantity } =
-    useShopContext();
+  const {
+    addProductToCart,
+    quantity,
+    incrementQuantity,
+    decrementQuantity,
+    setQuantity,
+  } = useShopContext();
+
+  useEffect(() => {
+    setQuantity(1);
+  }, [setQuantity]);
 
   // Dynamic Routing
   const { query } = useRouter();
@@ -34,6 +46,12 @@ export default function ProductDetails() {
 
   const [product] = data.products.data;
   const { title, description, image } = product.attributes;
+
+  function notify() {
+    toast.success(`${toCapitalize(title)} added to your cart.`, {
+      duration: 1500,
+    });
+  }
 
   return (
     <div>
@@ -60,7 +78,10 @@ export default function ProductDetails() {
               </button>
             </StyledQuantity>
             <StyledButton
-              onClick={() => addProductToCart(product.attributes, quantity)}
+              onClick={() => {
+                addProductToCart(product.attributes, quantity);
+                notify();
+              }}
             >
               Add to Cart
             </StyledButton>

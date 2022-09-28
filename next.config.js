@@ -8,6 +8,9 @@ const nextConfig = {
   images: {
     domains: ['res.cloudinary.com'],
   },
+  async redirects() {
+    return [{ source: '/cancel', destination: '/', permanent: true }];
+  },
 };
 
 module.exports = nextConfig;

@@ -1,13 +1,15 @@
 // Context
 import { ShopContextProvider } from '../lib/context';
+// Auth0
+import { UserProvider } from '@auth0/nextjs-auth0';
 // Components
 import Nav from '../components/Nav';
 // Query
 import { Provider, createClient } from 'urql';
-// Auth0
-import { UserProvider } from '@auth0/nextjs-auth0';
 // Styles
 import '../styles/globals.css';
+// Toast
+import { Toaster } from 'react-hot-toast';
 
 const client = createClient({
   url: `${process.env.NEXT_PUBLIC_BACKEND_GRAPHQL_URL}`,
@@ -15,14 +17,15 @@ const client = createClient({
 
 function MyApp({ Component, pageProps }) {
   return (
-    <UserProvider>
-      <Provider value={client}>
+    <Provider value={client}>
+      <UserProvider>
         <ShopContextProvider>
+          <Toaster />
           <Nav />
           <Component {...pageProps} />
         </ShopContextProvider>
-      </Provider>
-    </UserProvider>
+      </UserProvider>
+    </Provider>
   );
 }
 
