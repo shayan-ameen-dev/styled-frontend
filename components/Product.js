@@ -1,4 +1,6 @@
 import Link from 'next/link';
+// Utils
+import { formatMoney, toCapitalize } from '../lib/utils';
 // Styled
 import { StyledProduct } from '../styles/StyledProduct';
 
@@ -13,8 +15,8 @@ export default function Product({ attributes }) {
           <img src={url} alt={title} />
         </Link>
       </div>
-      <h2>{title}</h2>
-      <h3>{price}</h3>
+      <h2>{toCapitalize(title)}</h2>
+      <h3>{formatMoney(price)}</h3>
     </StyledProduct>
   );
 }

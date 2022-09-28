@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useShopContext } from '../lib/context';
 // Components
 import Cart from './Cart';
+import User from './User';
 // Styled
 import { StyledNav, StyledNavItems } from '../styles/StyledNav';
 // Motion
@@ -17,6 +18,7 @@ export default function Nav() {
     <StyledNav>
       <Link href={'/'}>Styled.</Link>
       <StyledNavItems>
+        <User />
         <div onClick={() => setIsCartOpen(true)}>
           {totalQuantity > 0 && (
             <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }}>

@@ -1,5 +1,9 @@
 // Context
 import { useShopContext } from '../lib/context';
+// Stripe
+import getStripe from '../lib/getStripe';
+// Utils
+import { formatMoney, toCapitalize } from '../lib/utils';
 // Styled
 import {
   StyledCard,
@@ -25,6 +29,19 @@ export default function Cart() {
     removeProductFromCart,
     totalPrice,
   } = useShopContext();
+
+  async function handleCheckout() {
+    const stripe = await getStripe();
+    const response = await fetch('/api/stripe', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(cartItems),
+    });
+    const data = await response.json();
+    await stripe.redirectToCheckout({ sessionId: data.id });
+  }
 
   return (
     <StyledCartWrapper
@@ -65,8 +82,8 @@ export default function Cart() {
                     alt={title}
                   />
                   <StyledCardInfo>
-                    <h3>{title}</h3>
-                    <h3>{price}$</h3>
+                    <h3>{toCapitalize(title)}</h3>
+                    <h3>{formatMoney(price)}</h3>
                     <StyledQuantity>
                       <span>Quantity</span>
                       <button onClick={() => removeProductFromCart(item, 1)}>
@@ -85,8 +102,8 @@ export default function Cart() {
         )}
         {cartItems.length > 0 && (
           <StyledCheckout layout>
-            <h3>Subtotal: {totalPrice}$</h3>
-            <button>Purchase</button>
+            <h3>Subtotal: {formatMoney(totalPrice)}</h3>
+            <button onClick={handleCheckout}>Purchase</button>
           </StyledCheckout>
         )}
       </StyledCart>
